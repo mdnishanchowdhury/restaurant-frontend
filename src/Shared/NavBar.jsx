@@ -1,12 +1,12 @@
 import { NavLink } from "react-router-dom"
 
 function NavBar() {
-     const links=<>
-    <li><NavLink>Home</NavLink></li>
-    <li><NavLink>CONTACT US</NavLink></li>
-    <li><NavLink>DASHBOARD</NavLink></li>
-    <li><NavLink>OUR MENU</NavLink></li>
-    <li><NavLink>OUR SHOP</NavLink></li>
+    const links = <>
+        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/contact'>CONTACT US</NavLink></li>
+        <li><NavLink>DASHBOARD</NavLink></li>
+        <li><NavLink to='/menu'>OUR MENU</NavLink></li>
+        <li><NavLink>OUR SHOP</NavLink></li>
     </>
     return (
         <>
@@ -26,7 +26,7 @@ function NavBar() {
                 </div>
                 <div className="navbar-center hidden  lg:flex">
                     <ul className="menu menu-horizontal px-1">
-                       {links}
+                        {links}
                     </ul>
                 </div>
                 <div className="navbar-end">

@@ -4,7 +4,7 @@ import SectionTitle from '../../components/SectionTile/SectionTitle'
 
 function Featured() {
     return (
-        <div className='mb-16 text-white '>
+        <div className='my-16 text-white '>
             <div
                 className="hero lg:min-h-[572px] bg-fixed"
                 style={{
@@ -36,8 +36,6 @@ function Featured() {
                                </div>
                             </div>
                         </div>
-
-
                     </div>
                 </div>
             </div>

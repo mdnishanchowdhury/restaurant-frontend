@@ -1,18 +1,10 @@
-import { useEffect, useState } from 'react'
 import SectionTitle from '../../components/SectionTile/SectionTitle'
 import MenuItem from '../../Shared/MenuItem';
+import useMenu from '../../Hooks/useMenu';
 
 function PropularMenu() {
-    const [menu, setMenu] = useState([]);
-    console.log(menu)
-    useEffect(() => {
-        fetch('menu.json')
-            .then(res => res.json())
-            .then(data => {
-                const popularItem = data.filter(item => item.category === 'popular')
-                setMenu(popularItem)
-            })
-    }, [])
+    const [menu] = useMenu();
+     const popularItems = menu.filter(item => item.category === 'popular');
     return (
         <section className='mb-16'>
             <SectionTitle
@@ -22,7 +14,7 @@ function PropularMenu() {
             </SectionTitle>
             <div className='grid md:grid-cols-2 gap-4 mt-10'>
                 {
-                    menu.map(item =>
+                    popularItems.map(item =>
                         <MenuItem key={item._id} item={item}></MenuItem>
                     )
                 }

@@ -3,7 +3,7 @@ import Main from "../Layout/Main";
 import Home from "../Page/Home/Home";
 import Menu from "../Page/Menu/Menu";
 import Contact from "../Page/Home/Contact";
-import OurShop from "../Page/OurShop/OurShop";
+import Orders from "../Page/OurShop/Orders";
 
 export const router = createBrowserRouter([
   {
@@ -23,8 +23,8 @@ export const router = createBrowserRouter([
           element:<Contact></Contact>
         },
         {
-          path:'ourshop/:catagory',
-          element:<OurShop></OurShop>
+          path:'orders/:catagory',
+          element:<Orders></Orders>
         }
 
     ]

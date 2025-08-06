@@ -3,15 +3,14 @@ import img from '../../assets/shop/banner2.jpg'
 import SectionCover from '../../components/SectionCover/SectionCover'
 import { Tab, Tabs, TabList, TabPanel } from 'react-tabs';
 import 'react-tabs/style/react-tabs.css';
-import FoodCard from './FoodCard';
 import useMenu from '../../Hooks/useMenu';
 import { useParams } from 'react-router-dom';
+import OrderTob from './OrderTob';
 
-function OurShop() {
+function Orders() {
     const categories =["salad","pizza","soup","dessert","drinks"]
      const { catagory } = useParams();
-    console.log('catagory', catagory)
-
+     
     const initialIndex =categories.indexOf(catagory);
 
     const [tabIndex, setTabIndex] = useState(initialIndex);
@@ -51,15 +50,15 @@ function OurShop() {
                         <Tab>Drinks</Tab>
                     </TabList>
 
-                    <TabPanel><FoodCard items={salad} /></TabPanel>
-                    <TabPanel><FoodCard items={pizza} /></TabPanel>
-                    <TabPanel><FoodCard items={soup} /></TabPanel>
-                    <TabPanel><FoodCard items={dessert} /></TabPanel>
-                    <TabPanel><FoodCard items={drinks} /></TabPanel>
+                    <TabPanel><OrderTob items={salad} /></TabPanel>
+                    <TabPanel><OrderTob items={pizza} /></TabPanel>
+                    <TabPanel><OrderTob items={soup} /></TabPanel>
+                    <TabPanel><OrderTob items={dessert} /></TabPanel>
+                    <TabPanel><OrderTob items={drinks} /></TabPanel>
                 </Tabs>
             </section>
         </div>
     );
 }
 
-export default OurShop;
+export default Orders;

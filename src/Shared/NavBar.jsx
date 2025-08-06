@@ -6,7 +6,7 @@ function NavBar() {
         <li><NavLink to='/contact'>CONTACT US</NavLink></li>
         <li><NavLink>DASHBOARD</NavLink></li>
         <li><NavLink to='/menu'>OUR MENU</NavLink></li>
-        <li><NavLink to='/ourshop/salad'>OUR SHOP</NavLink></li>
+        <li><NavLink to='/orders/salad'>OUR SHOP</NavLink></li>
     </>
     return (
         <>

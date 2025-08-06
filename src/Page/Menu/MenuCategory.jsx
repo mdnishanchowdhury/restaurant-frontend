@@ -1,6 +1,7 @@
+import { Link } from 'react-router-dom'
 import MenuItem from '../../Shared/MenuItem'
 
-function MenuCategory({ item }) {
+function MenuCategory({ item,title }) {
 
     return (
         <section>
@@ -11,9 +12,11 @@ function MenuCategory({ item }) {
                     )
                 }
             </div>
-            <div className='text-center mt-10'>
-                <button className="btn btn-outline btn-secondary border-0 border-b-4 text-xl font-medium ">ORDER YOUR FAVOURITE FOOD</button>
-            </div>
+            <Link to={`/ourshop/${title}`}>
+                <div className='text-center mt-10'>
+                    <button className="btn btn-outline btn-secondary border-0 border-b-4 text-xl font-medium ">ORDER YOUR FAVOURITE FOOD</button>
+                </div>
+            </Link>
         </section>
 
     )

@@ -1,6 +1,9 @@
-import { NavLink } from "react-router-dom"
+import { useContext } from "react"
+import { Link, NavLink } from "react-router-dom"
+import { AuthContext } from "../Providers/AuthProvider"
 
 function NavBar() {
+    const { logo, userLogOut, user } = useContext(AuthContext)
     const links = <>
         <li><NavLink to='/'>Home</NavLink></li>
         <li><NavLink to='/contact'>CONTACT US</NavLink></li>
@@ -8,6 +11,14 @@ function NavBar() {
         <li><NavLink to='/menu'>OUR MENU</NavLink></li>
         <li><NavLink to='/orders/salad'>OUR SHOP</NavLink></li>
     </>
+
+    //logout
+    const handleLoginOut = () => {
+        userLogOut()
+            .then(() => {
+                alert('Successfully LogOut')
+            })
+    }
     return (
         <>
             <div className="navbar fixed z-10 bg-orange-30 bg-[#15151580] max-w-7xl text-white shadow-sm">
@@ -22,7 +33,7 @@ function NavBar() {
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-3xl font-black">BISTRO BOSS</a>
+                    <a className="btn btn-ghost text-3xl font-black">{logo}</a>
                 </div>
                 <div className="navbar-center hidden  lg:flex">
                     <ul className="menu menu-horizontal px-1">
@@ -30,7 +41,21 @@ function NavBar() {
                     </ul>
                 </div>
                 <div className="navbar-end">
-                    <a className="btn">Button</a>
+                    {
+                        user&& user.email ?
+                            <>
+                                <Link to='/signUp' onClick={handleLoginOut} className="btn">SignOut</Link>
+                            </>
+                            :
+                            <>
+                                <Link to='/login' className="btn">Login</Link>
+                                <Link to='/signUp' className="btn">SignUp</Link>
+                            </>
+
+                    }
+
+
+                    {/* <a className="btn">Button</a> */}
                 </div>
             </div>
         </>

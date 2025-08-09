@@ -3,10 +3,11 @@ import { useEffect } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
 import img from '../../assets/icon/RegImage.png'
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 function Login() {
     const { userSignIn } = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -16,11 +17,17 @@ function Login() {
         userSignIn(email, password)
             .then(result => {
                 console.log(result)
+                navigate('/')
             })
     };
     useEffect(() => {
         loadCaptchaEnginge(6);
     }, [])
+
+
+    useEffect(() => {
+        document.title = 'Restaurant | Login Form';
+    }, []);
 
     return (
         <div className="hero bg-base-200 min-h-screen">

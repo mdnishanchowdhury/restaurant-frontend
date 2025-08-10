@@ -3,11 +3,15 @@ import { useEffect } from 'react';
 import { loadCaptchaEnginge, LoadCanvasTemplate } from 'react-simple-captcha';
 import { AuthContext } from '../../Providers/AuthProvider';
 import img from '../../assets/icon/RegImage.png'
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
+import Swal from 'sweetalert2';
 
 function Login() {
     const { userSignIn } = useContext(AuthContext);
     const navigate = useNavigate();
+    const location = useLocation();
+    const from = location.state?.from?.pathname || "/";
+
     const handleSubmit = (e) => {
         e.preventDefault();
         const form = e.target;
@@ -16,8 +20,22 @@ function Login() {
         const captcha = form.captcha.value;
         userSignIn(email, password)
             .then(result => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "successfully Login",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
                 console.log(result)
-                navigate('/')
+                navigate(from, { replace: true });
+            })
+            .catch(error => {
+                Swal.fire({
+                    title: `${error.message}`,
+                    icon: "success",
+                    draggable: true
+                });
             })
     };
     useEffect(() => {

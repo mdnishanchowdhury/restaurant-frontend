@@ -6,6 +6,7 @@ import Contact from "../Page/Home/Contact";
 import Orders from "../Page/OurShop/Orders";
 import Login from "../Page/Login/Login";
 import SignUp from "../Page/SignUp/SignUp";
+import PrivetRoute from "./PrivetRoute";
 
 export const router = createBrowserRouter([
   {
@@ -26,7 +27,7 @@ export const router = createBrowserRouter([
         },
         {
           path:'orders/:catagory',
-          element:<Orders></Orders>
+          element:<PrivetRoute><Orders></Orders></PrivetRoute>
         },
         {
           path:'login',

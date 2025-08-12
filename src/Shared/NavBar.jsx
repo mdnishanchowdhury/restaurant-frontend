@@ -2,11 +2,14 @@ import { useContext } from "react"
 import { Link, NavLink } from "react-router-dom"
 import { AuthContext } from "../Providers/AuthProvider"
 import Swal from "sweetalert2"
-
+import { IoCartOutline } from "react-icons/io5";
+import useCart from "../Hooks/useCart";
+import { GiHamburgerMenu } from "react-icons/gi";
 function NavBar() {
-    const { logo, userLogOut, user } = useContext(AuthContext)
+    const [cart] = useCart();
+    const { userLogOut, user } = useContext(AuthContext)
     const links = <>
-        <li><NavLink to='/'>Home</NavLink></li>
+        <li><NavLink to='/'>HOME</NavLink></li>
         <li><NavLink to='/contact'>CONTACT US</NavLink></li>
         <li><NavLink>DASHBOARD</NavLink></li>
         <li><NavLink to='/menu'>OUR MENU</NavLink></li>
@@ -28,26 +31,36 @@ function NavBar() {
     }
     return (
         <>
-            <div className="navbar fixed z-10 bg-orange-30 bg-[#15151580] max-w-7xl text-white shadow-sm">
+            <div className="navbar fixed z-10  bg-[#15151580] max-w-7xl text-white shadow-sm">
                 <div className="navbar-start">
-                    <div className="dropdown">
+                    <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                            <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
+                          <GiHamburgerMenu className="w-8 h-8 " />
                         </div>
                         <ul
                             tabIndex={0}
-                            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
+                            className="menu menu-[16px] dropdown-content rounded-box z-1 mt-3 w-52 p-2 shadow bg-[#D1A054] text-xl font-medium ">
                             {links}
                         </ul>
                     </div>
-                    <a className="btn btn-ghost text-3xl font-black">{logo}</a>
+                    <a className="btn btn-ghost text-xl md:text-3xl font-black">BISTRO BOSS</a>
                 </div>
                 <div className="navbar-center hidden  lg:flex">
                     <ul className="menu menu-horizontal px-1">
                         {links}
                     </ul>
                 </div>
-                <div className="navbar-end">
+                <div className="navbar-end gap-3 ">
+                   <Link to='/dashboard/cart'>
+                    <button className="btn relative  rounded-full">
+                        <IoCartOutline className="w-8 h-8" />
+                        <div className="badge badge-sm badge-secondary absolute top-0 left-0 -translate-y-1/2">
+                            +{cart.length}
+                        </div>
+                    </button>
+
+                   </Link>
+
                     {
                         user && user.email ?
                             <>

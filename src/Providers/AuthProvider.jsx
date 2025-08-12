@@ -44,7 +44,6 @@ function AuthProvider({ children }) {
     }, [])
 
     const authInfo = {
-        logo: 'BISTRO BOSS',
         user,
         loading,
         userSignIn,

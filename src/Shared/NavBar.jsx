@@ -6,7 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import useCart from "../Hooks/useCart";
 import { GiHamburgerMenu } from "react-icons/gi";
 function NavBar() {
-    const [cart] = useCart();
+    const [cart,refetch] = useCart();
     const { userLogOut, user } = useContext(AuthContext)
     const links = <>
         <li><NavLink to='/'>HOME</NavLink></li>

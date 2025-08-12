@@ -1,15 +1,51 @@
+import { Link } from "react-router-dom";
 import useCart from "../../../Hooks/useCart"
 import { MdDelete } from "react-icons/md";
+import useAxiosSecure from "../../../Hooks/useAxiosSecure";
+import Swal from "sweetalert2";
 function Cart() {
-    const [cart] = useCart();
+    const [cart, refetch] = useCart();
     const totalPrice = cart.reduce((total, item) => total + item.price, 0)
-    console.log('cartss', cart)
+    const useAxios = useAxiosSecure();
+
+    const handleDeleted = (_id) => {
+        // delete alert
+        Swal.fire({
+            title: "Are you sure?",
+            text: "You won't be able to revert this!",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, delete it!"
+        }).then((result) => {
+            if (result.isConfirmed) {
+                useAxios.delete(`/carts/${_id}`)
+                    .then(res => {
+                        if (res.data.deletedCount > 0) {
+                            console.log('Deleted', _id);
+                            refetch(); 
+                        }
+                    })
+                    .catch(err => {
+                        console.error('Delete failed:', err);
+                    });
+                Swal.fire({
+                    title: "Deleted!",
+                    text: "Your file has been deleted.",
+                    icon: "success"
+                });
+            }
+        });
+        // end
+
+    }
     return (
         <div className="mt-3 ">
             <div className="flex justify-evenly items-center">
                 <h2 className="text-[16px] md:text-3xl font-bold uppercase">Total orders: {cart.length}</h2>
                 <h2 className="text-[16px] md:text-3xl font-bold uppercase">total price: ${totalPrice}</h2>
-                <button className="btn btn-primary uppercase">Pay</button>
+                <button className="btn btn-primary uppercase bg-[#D1A054]">Pay</button>
             </div>
             {/* table */}
             <div className="overflow-x-auto mt-4">
@@ -49,9 +85,11 @@ function Cart() {
                                     <h2>{item.price}</h2>
                                 </td>
                                 <th>
-                                    <button className="btn btn-ghost btn-xs uppercase">
-                                        <MdDelete className="w-6 h-6" />
-                                    </button>
+                                    <Link >
+                                        <button onClick={() => handleDeleted(item._id)} className="btn btn-ghost btn-xs uppercase">
+                                            <MdDelete className="w-6 h-6" />
+                                        </button>
+                                    </Link>
                                 </th>
                             </tr>
                         )

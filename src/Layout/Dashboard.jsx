@@ -12,7 +12,7 @@ function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <div className="flex">
+    <div className="flex ">
 
       {/* Hamburger button - visible only on mobile */}
       <button
@@ -25,8 +25,8 @@ function Dashboard() {
 
       {/* Sidebar */}
       <div
-        className={`
-          fixed top-0 left-0 h-full bg-[#D1A054] w-[280px] flex justify-center
+        className={` 
+          fixed top-0 left-0  bg-[#D1A054] w-[280px] min-h-screen flex justify-center
           transform transition-transform duration-300
           md:relative md:translate-x-0
           ${sidebarOpen ? 'translate-x-0' : '-translate-x-full'}

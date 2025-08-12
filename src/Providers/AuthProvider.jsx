@@ -49,7 +49,8 @@ function AuthProvider({ children }) {
         userSignIn,
         createUser,
         updatedProfile,
-        userLogOut
+        userLogOut,
+        setUser
     }
     return (
         <AuthContext.Provider value={authInfo}>

@@ -4,35 +4,46 @@ import img from '../../assets/icon/RegImage.png'
 import { Link, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import Swal from 'sweetalert2';
+import useAxiosPublic from '../../Hooks/useAxiosPublic';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 function SignUp() {
     const { createUser, updatedProfile } = useContext(AuthContext);
     const navigate = useNavigate();
     const { register, handleSubmit, reset, watch, formState: { errors } } = useForm();
+    const axiosPublic = useAxiosPublic();
+
     const onSubmit = data => {
         createUser(data.email, data.password)
-            .then(result => {
-                const loggedUser = result.user;
-                navigate('/')
-                console.log(loggedUser)
-                reset();
-                updatedProfile(data.name, data.PhotoURl)
-                    .then(updated => {
-                        console.log(updated)
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "successfully SignUp",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
+            .then(() => {
+
+                const userInfo = {
+                    name: data.name,
+                    email: data.email
+                }
+                axiosPublic.post('users', userInfo)
+                    .then(res => {
+                        console.log('resss', res.data)
+                        if (res.data.insertedId) {
+                            updatedProfile(data.name, data.PhotoURl)
+                                .then(() => {
+                                    reset();
+                                    Swal.fire({
+                                        position: "top-end",
+                                        icon: "success",
+                                        title: "successfully SignUp",
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    navigate('/')
+                                })
+                        }
                     })
                     .catch(error => {
                         console.log(error.message)
                     })
             })
     };
-    console.log(watch("example"));
 
 
 
@@ -75,16 +86,19 @@ function SignUp() {
                         </div>
                         {/* btn */}
                         <div className="form-control">
-                            <input className="btn btn-neutral w-full mt-4" type="submit" value="Sign Up" />
+                            <input className="btn btn-neutral bg-[#D1A054] w-full mt-4" type="submit" value="Sign Up" />
                         </div>
                     </form>
-                    <p className='text-center pb-4 text-xs font-medium'><samp>Already registered?<Link to='/login'>Go to log in</Link></samp></p>
+                    
+                     <h2 className='font-semibold text-center mb-2 text-[#D1A054]'><span className='font-normal'>Already registered? </span> <Link to='/login'> Go to log in</Link></h2>
+                    <SocialLogin></SocialLogin>
                 </div>
 
                 {/* image */}
                 <div className="text-center lg:text-left max-w-md">
                     <img src={img} alt="" />
                 </div>
+
 
             </div>
         </div>

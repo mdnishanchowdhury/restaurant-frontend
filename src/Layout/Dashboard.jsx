@@ -86,6 +86,7 @@ function Dashboard() {
             </NavLink>
           </li>
 
+          {/* shared navlink */}
           <div className="divider border-t border-yellow-300 my-4"></div>
 
           {/* Home */}

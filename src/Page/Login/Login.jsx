@@ -5,6 +5,7 @@ import { AuthContext } from '../../Providers/AuthProvider';
 import img from '../../assets/icon/RegImage.png'
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
+import SocialLogin from '../../components/SocialLogin/SocialLogin';
 
 function Login() {
     const { userSignIn } = useContext(AuthContext);
@@ -74,10 +75,11 @@ function Login() {
                         </div>
 
                         <div className="form-control">
-                            <input className="btn btn-neutral w-full mt-4" type="submit" value="Login" />
+                            <input className="btn btn-neutral bg-[#D1A054] w-full mt-4" type="submit" value="Login" />
                         </div>
                     </form>
-                    <p className='text-center pb-4 text-xs font-medium'><samp>New here? <Link to='/signUp'>Create a New Account</Link></samp></p>
+                    <h2 className='font-semibold text-center mb-2 text-[#D1A054]'><span className='font-normal'>New here? </span> <Link to='/signUp'>Create a New Account</Link></h2>
+                    <SocialLogin></SocialLogin>
                 </div>
 
                 {/* Text Section */}

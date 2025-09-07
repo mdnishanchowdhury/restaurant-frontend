@@ -51,7 +51,7 @@ function Dashboard() {
             isAdmin ? <>
               {/* Admin Home */}
               <li className="uppercase">
-                <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                <NavLink to="/" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
                   <FaHome className="w-8 h-8" />
                   Admin Home
                 </NavLink>

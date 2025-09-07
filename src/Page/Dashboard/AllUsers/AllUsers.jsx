@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query'
-import React from 'react'
 import useAxiosSecure from '../../../Hooks/useAxiosSecure'
 import { Link } from 'react-router-dom';
 import { MdDelete } from 'react-icons/md';

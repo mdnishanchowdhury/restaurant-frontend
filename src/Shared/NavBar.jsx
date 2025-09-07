@@ -6,7 +6,7 @@ import { IoCartOutline } from "react-icons/io5";
 import useCart from "../Hooks/useCart";
 import { GiHamburgerMenu } from "react-icons/gi";
 function NavBar() {
-    const [cart,refetch] = useCart();
+    const [cart, refetch] = useCart();
     const { userLogOut, user } = useContext(AuthContext)
     const links = <>
         <li><NavLink to='/'>HOME</NavLink></li>
@@ -35,7 +35,7 @@ function NavBar() {
                 <div className="navbar-start">
                     <div className="dropdown ">
                         <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
-                          <GiHamburgerMenu className="w-8 h-8 " />
+                            <GiHamburgerMenu className="w-8 h-8 " />
                         </div>
                         <ul
                             tabIndex={0}
@@ -51,15 +51,15 @@ function NavBar() {
                     </ul>
                 </div>
                 <div className="navbar-end gap-3 ">
-                   <Link to='/dashboard/cart'>
-                    <button className="btn relative  rounded-full">
-                        <IoCartOutline className="w-8 h-8" />
-                        <div className="badge badge-sm badge-secondary absolute top-0 left-0 -translate-y-1/2">
-                            +{cart.length}
-                        </div>
-                    </button>
+                    <Link to='/dashboard/cart'>
+                        <button className="btn relative  rounded-full">
+                            <IoCartOutline className="w-8 h-8" />
+                            <div className="badge badge-sm badge-secondary absolute top-0 left-0 -translate-y-1/2">
+                                +{cart.length}
+                            </div>
+                        </button>
 
-                   </Link>
+                    </Link>
 
                     {
                         user && user.email ?

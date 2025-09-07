@@ -42,6 +42,7 @@ function AuthProvider({ children }) {
             unsubscribe()
         }
     }, []);
+    
     //social login
 
     const userGoogleLogin = () => {

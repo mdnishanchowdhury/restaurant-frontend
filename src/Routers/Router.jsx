@@ -9,6 +9,7 @@ import SignUp from "../Page/SignUp/SignUp";
 import Dashboard from "../Layout/Dashboard";
 import Cart from "../Page/Dashboard/Cart/Cart";
 import PrivetRoute from "./PrivetRoute";
+import AllUsers from "../Page/Dashboard/AllUsers/AllUsers";
 
 export const router = createBrowserRouter([
   {
@@ -38,6 +39,10 @@ export const router = createBrowserRouter([
       {
         path: 'signUp',
         element: <SignUp></SignUp>
+      },
+      {
+        path: '*',
+        element: <h2>NO ROUTE</h2>
       }
 
     ]
@@ -49,6 +54,17 @@ export const router = createBrowserRouter([
       {
         path: 'cart',
         element: <Cart></Cart>
+      },
+
+      // admin routes
+      {
+        path: 'allUsers',
+        element: <AllUsers></AllUsers>
+      },
+
+      {
+        path: '*',
+        element: <h2>NO ROUTE</h2>
       }
     ]
   }

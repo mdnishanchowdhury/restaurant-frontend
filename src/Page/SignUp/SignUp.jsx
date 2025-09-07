@@ -16,7 +16,6 @@ function SignUp() {
     const onSubmit = data => {
         createUser(data.email, data.password)
             .then(() => {
-
                 const userInfo = {
                     name: data.name,
                     email: data.email

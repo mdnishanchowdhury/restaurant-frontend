@@ -1,15 +1,17 @@
-import { FaCalendar, FaHome } from "react-icons/fa";
-import { IoCartOutline } from "react-icons/io5";
+import { FaBook, FaHome, FaUsers } from "react-icons/fa";
 import { NavLink, Outlet } from 'react-router-dom';
 import { GiHamburgerMenu } from "react-icons/gi";
 import { IoMdContact } from "react-icons/io";
-import { FaBookmark } from "react-icons/fa6";
-import { IoIosAddCircle } from "react-icons/io";
-import { MdOutlinePayment } from "react-icons/md";
+import { FaBasketShopping } from "react-icons/fa6";
+import { MdAddShoppingCart } from "react-icons/md";
 import { useState } from "react";
+import { AiOutlineMenuUnfold } from "react-icons/ai";
+import { RiMenuFold2Line } from "react-icons/ri";
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  // todo: get is admin value from the database;
+  const isAdmin = true;
 
   return (
     <div className="flex ">
@@ -44,82 +46,85 @@ function Dashboard() {
 
         <ul className="menu min-h-full w-[233px] p-4 gap-4 text-white">
           {/* User Home */}
-          <li className="uppercase">
-            <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <FaHome className="w-8 h-8" />
-              User Home
-            </NavLink>
-          </li>
-          {/* Reservation */}
-          <li className="uppercase">
-            <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <FaCalendar className="w-8 h-8" />
-              Reservation
-            </NavLink>
-          </li>
-          {/* Payment History */}
-          <li className="uppercase">
-            <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <MdOutlinePayment className="w-8 h-8" />
-              Payment History
-            </NavLink>
-          </li>
-          {/* My Cart */}
-          <li className="uppercase">
-            <NavLink to="/dashboard/cart" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <IoCartOutline className="w-8 h-8" />
-              My Cart
-            </NavLink>
-          </li>
-          {/* Add Review */}
-          <li className="uppercase">
-            <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <IoIosAddCircle className="w-8 h-8" />
-              Add Review
-            </NavLink>
-          </li>
-          {/* My Booking */}
-          <li className="uppercase">
-            <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <FaBookmark className="w-8 h-8" />
-              My Booking
-            </NavLink>
-          </li>
 
-          {/* shared navlink */}
-          <div className="divider border-t border-yellow-300 my-4"></div>
+          {
+            isAdmin ? <>
+              {/* Admin Home */}
+              <li className="uppercase">
+                <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                  <FaHome className="w-8 h-8" />
+                  Admin Home
+                </NavLink>
+              </li>
+              {/*  Add Items*/}
+              <li className="uppercase">
+                <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                  <MdAddShoppingCart className="w-8 h-8" />
+                  Add Items
+                </NavLink>
+              </li>
+              {/* Manage Items */}
+              <li className="uppercase">
+                <NavLink to="/dashboard/manageItems" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                  <RiMenuFold2Line className="w-8 h-8" />
+                  Manage Items
+                </NavLink>
+              </li>
+              {/* Manage Bookings */}
+              <li className="uppercase">
+                <NavLink to="/dashboard/manageBooking" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                  <FaBook className="w-8 h-8" />
+                  Manage Bookings
+                </NavLink>
+              </li>
+              {/*  All Users*/}
+              <li className="uppercase">
+                <NavLink to="/dashboard/allUsers" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                  <FaUsers className="w-8 h-8" />
+                  All Users
+                </NavLink>
+              </li>
+            </>
+              :
+              <>
+                {/* shared navlink */}
+                {/* user panel */}
+                <div className="divider border-t border-yellow-300 my-4"></div>
 
-          {/* Home */}
-          <li className="uppercase">
-            <NavLink to="/" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <FaHome className="w-8 h-8" />
-              Home
-            </NavLink>
-          </li>
+                {/* Home */}
+                <li className="uppercase">
+                  <NavLink to="/" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                    <FaHome className="w-8 h-8" />
+                    Home
+                  </NavLink>
+                </li>
 
-          {/* Menu */}
-          <li className="uppercase">
-            <NavLink to="/" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <GiHamburgerMenu className="w-8 h-8" />
-              Menu
-            </NavLink>
-          </li>
+                {/* Menu */}
+                <li className="uppercase">
+                  <NavLink to="/menu" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                    <GiHamburgerMenu className="w-8 h-8" />
+                    Menu
+                  </NavLink>
+                </li>
+                {/* Menu */}
+                <li className="uppercase">
+                  <NavLink to="/shop" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                    <FaBasketShopping className="w-8 h-8" />
+                    Shop
+                  </NavLink>
+                </li>
 
-          {/* Shop */}
-          <li className="uppercase">
-            <NavLink to="/" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <IoCartOutline className="w-8 h-8" />
-              Shop
-            </NavLink>
-          </li>
+                {/* Contact */}
+                <li className="uppercase">
+                  <NavLink to="/contact" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                    <IoMdContact className="w-8 h-8" />
+                    Contact
+                  </NavLink>
+                </li>
+              </>
+          }
 
-          {/* Contact */}
-          <li className="uppercase">
-            <NavLink to="/" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
-              <IoMdContact className="w-8 h-8" />
-              Contact
-            </NavLink>
-          </li>
+
         </ul>
       </div>
 

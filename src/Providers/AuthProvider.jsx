@@ -3,6 +3,7 @@ import { createContext, useEffect, useState } from "react"
 import { getAuth } from "firebase/auth";
 import { app } from "../Firebase/firebase.config";
 import useAxiosSecure from "../Hooks/useAxiosSecure";
+import useAxiosPublic from "../Hooks/useAxiosPublic";
 
 export const AuthContext = createContext(null)
 function AuthProvider({ children }) {
@@ -10,7 +11,7 @@ function AuthProvider({ children }) {
     const [loading, setLoading] = useState(true);
     const auth = getAuth(app);
     const provider = new GoogleAuthProvider();
-    const axiosSecure = useAxiosSecure();
+    const axiosPublic = useAxiosPublic();
     //create signIn
     const createUser = (email, password) => {
         setLoading(true)
@@ -38,7 +39,7 @@ function AuthProvider({ children }) {
             setUser(currentUser)
             if (currentUser) {
                 const useInfo = { email: currentUser.email }
-                axiosSecure.post('/jwt', useInfo)
+                axiosPublic.post('/jwt', useInfo)
                     .then(res => {
                         if (res.data.token) {
                             localStorage.setItem('access-token', res.data.token)
@@ -54,7 +55,7 @@ function AuthProvider({ children }) {
         return () => {
             unsubscribe()
         }
-    }, []);
+    }, [axiosPublic]);
 
     //social login
 

@@ -59,7 +59,7 @@ function Dashboard() {
               </li>
               {/*  Add Items*/}
               <li className="uppercase">
-                <NavLink to="/dashboard/userHome" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
+                <NavLink to="/dashboard/addItems" className={({ isActive }) => isActive ? "text-yellow-300" : ""}>
                   <MdAddShoppingCart className="w-8 h-8" />
                   Add Items
                 </NavLink>

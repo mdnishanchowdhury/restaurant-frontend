@@ -5,13 +5,14 @@ import { IoMdContact } from "react-icons/io";
 import { FaBasketShopping } from "react-icons/fa6";
 import { MdAddShoppingCart } from "react-icons/md";
 import { useState } from "react";
-import { AiOutlineMenuUnfold } from "react-icons/ai";
 import { RiMenuFold2Line } from "react-icons/ri";
+import useAdmin from "../Hooks/useAdmin";
 
 function Dashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   // todo: get is admin value from the database;
-  const isAdmin = true;
+  // const isAdmin = true;
+  const [isAdmin, isAdminLoading] = useAdmin();
 
   return (
     <div className="flex ">

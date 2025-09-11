@@ -17,6 +17,7 @@ const useAxiosSecure = () => {
     }, (error) => {
         return Promise.reject(error);
     });
+    
     // inteceptors 401 and 403 
     axiosSecure.interceptors.response.use((response) => {
         return response;

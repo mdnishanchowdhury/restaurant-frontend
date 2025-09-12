@@ -80,8 +80,8 @@ function ManageItems() {
                                     <h2>{item.price}</h2>
                                 </td>
                                 <th>
-                                    <Link >
-                                        <button onClick={() => handleEdit(item._id)} className="btn btn-ghost btn-xs uppercase">
+                                    <Link to={`/dashboard/updateItem/${item._id}`}>
+                                        <button className="btn btn-ghost btn-xs uppercase">
                                             <BiEdit className="w-6 h-6" />
                                         </button>
                                     </Link>

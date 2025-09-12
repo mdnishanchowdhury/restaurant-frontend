@@ -1,13 +1,15 @@
-import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../../Hooks/useAxiosSecure";
-import useAxiosPublic from "../../../Hooks/useAxiosPublic";
-import Swal from "sweetalert2";
+import { useForm } from 'react-hook-form';
+import { useLoaderData } from 'react-router-dom'
+import Swal from 'sweetalert2';
+import useAxiosSecure from '../../../Hooks/useAxiosSecure';
+import useAxiosPublic from '../../../Hooks/useAxiosPublic';
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`
-export default function AddItems() {
+function UpdateItem() {
+    const { name, category, price, recipe,_id } = useLoaderData();
+    const { register, handleSubmit, reset } = useForm();
     const axiosSecure = useAxiosSecure();
     const axiosPublic = useAxiosPublic();
-    const { register, handleSubmit } = useForm();
 
     const onSubmit = async (data) => {
         console.log(data)
@@ -18,8 +20,6 @@ export default function AddItems() {
                 "content-type": "multipart/form-data",
             }
         })
-        // console.log(res.data)
-        // console.log(res.data.data.display_url)
         if (res.data.success) {
             const itemInfo = {
                 name: data.name,
@@ -28,13 +28,13 @@ export default function AddItems() {
                 recipe: data.recipe,
                 image: res.data.data.display_url
             }
-            const menuRes = await axiosSecure.post('/menu', itemInfo);
+            const menuRes = await axiosSecure.patch(`/menu/${_id}`, itemInfo);
             console.log(menuRes.data)
-            if (menuRes.data.insertedId) {
+            if (menuRes.data.modifiedCount > 0) {
                 Swal.fire({
                     position: "top-end",
                     icon: "success",
-                    title: "Your Product Successfully Added",
+                    title: "Your Product Successfully Updated",
                     showConfirmButton: false,
                     timer: 1500
                 });
@@ -46,8 +46,9 @@ export default function AddItems() {
 
     return (
         <div className="bg-gray-100 p-6 rounded-md shadow-sm max-w-2xl mx-auto">
-               <h2 className="text-[16px] md:text-3xl font-bold uppercase pb-4 text-center">
-                Add Menu
+
+            <h2 className="text-[16px] md:text-3xl font-bold uppercase pb-4 text-center">
+                Update Menu
             </h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 {/* Recipe name */}
@@ -57,6 +58,7 @@ export default function AddItems() {
                     </label>
                     <input
                         type="text"
+                        defaultValue={name}
                         placeholder="Recipe name"
                         {...register("name")}
                         className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
@@ -70,10 +72,11 @@ export default function AddItems() {
                             Category*
                         </label>
                         <select
-                            {...register("category")}
+                            defaultValue={category}
+                            {...register("category", { required: true })}
                             className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
                         >
-                            <option value="">Select category</option>
+                            <option disabled value="defual">Select category</option>
                             <option value="salad">Salad</option>
                             <option value="pizza">Pizza</option>
                             <option value="soups">Soups</option>
@@ -86,6 +89,7 @@ export default function AddItems() {
                             Price*
                         </label>
                         <input
+                            defaultValue={price}
                             type="number"
                             placeholder="Price"
                             {...register("price")}
@@ -101,6 +105,7 @@ export default function AddItems() {
                     </label>
                     <textarea
                         rows="4"
+                        defaultValue={recipe}
                         placeholder="Recipe Datails"
                         {...register("recipe")}
                         className="w-full border rounded-md px-3 py-2 focus:outline-none focus:ring-2 focus:ring-yellow-500"
@@ -121,9 +126,11 @@ export default function AddItems() {
                     type="submit"
                     className="bg-yellow-700 text-white px-4 py-2 rounded-md shadow hover:bg-yellow-800 transition"
                 >
-                    Add Item 🍴
+                    Update Menu Item
                 </button>
             </form>
         </div>
-    );
+    )
 }
+
+export default UpdateItem
